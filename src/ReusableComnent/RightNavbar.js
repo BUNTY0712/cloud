@@ -62,33 +62,31 @@ const RightNavbar = () => {
 	];
 	return (
 		<>
-			<Grid container>
-				<Grid style={{ background: '#20295b' }} item lg={2}>
-					<Box mt={5} mb={3} style={{ textAlign: 'center', color: 'white' }}>
-						<h5>Menu</h5>
-					</Box>
-					{menu_item.map((item, i) => (
-						<Box
-							key={i}
-							mt={2}
-							style={{
-								textAlign: 'center',
-								display: 'flex',
-								color: '#859db4',
-								justifyContent: 'space-between',
-								fontWeight: '600',
-								padding: '10px 20px',
-							}}>
-							<Box style={{ display: 'flex' }}>
-								<Box>{item.logo}</Box>
-								<Box ml={1} style={{ fontSize: '20px' }}>
-									{item.name}
-								</Box>
+			<Grid style={{ background: '#20295b' }} item lg={2}>
+				<Box mt={5} mb={3} style={{ textAlign: 'center', color: 'white' }}>
+					<h5>Menu</h5>
+				</Box>
+				{menu_item.map((item, i) => (
+					<Box
+						key={i}
+						mt={2}
+						style={{
+							textAlign: 'center',
+							display: 'flex',
+							color: '#859db4',
+							justifyContent: 'space-between',
+							fontWeight: '600',
+							padding: '10px 20px',
+						}}>
+						<Box style={{ display: 'flex' }}>
+							<Box>{item.logo}</Box>
+							<Box ml={1} style={{ fontSize: '20px' }}>
+								{item.name}
 							</Box>
-							<Box>{item.rightarrow}</Box>
 						</Box>
-					))}
-				</Grid>
+						<Box>{item.rightarrow}</Box>
+					</Box>
+				))}
 			</Grid>
 		</>
 	);

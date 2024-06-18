@@ -27,6 +27,8 @@ const MainRouter = () => {
 			<Routes>
 				<Route path='/' element={<Login />} />
 				<Route path='/rightnavbar' element={<RightNavbar />} />
+				<Route path='/dashboard' element={<Dashboard />} />
+
 				<Route
 					path='/dashboard'
 					element={<PrivateRoute element={<Dashboard />} />}
