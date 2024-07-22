@@ -15,6 +15,8 @@ import AddMember from './Pages/Desktop/AddMember';
 import Directt from './Pages/Desktop/Directt';
 import Tree from './Pages/Desktop/Tree';
 import WalletAddress from './Pages/Desktop/WalletAddress';
+import Try from './Pages/Desktop/Try';
+import Search from './Pages/Desktop/Search';
 // import Login from './Pages/Login';
 
 const PrivateRoute = ({ element, ...props }) => {
@@ -38,6 +40,9 @@ const MainRouter = () => {
 				<Route path='/addmember' element={<AddMember />} />
 				<Route path='/direct' element={<Directt />} />
 				<Route path='/tree' element={<Tree />} />
+				<Route path='/try' element={<Try />} />
+				<Route path='/search' element={<Search />} />
+
 				<Route path='/walletaddress' element={<WalletAddress />} />
 				<Route
 					path='/dashboard'
