@@ -9,7 +9,7 @@ import { CiCircleList } from 'react-icons/ci';
 import { RiAlertFill } from 'react-icons/ri';
 import { BiBorderBottom, BiSolidBank } from 'react-icons/bi';
 import { IoIosInformationCircleOutline } from 'react-icons/io';
-const WalletAddress = () => {
+const DesktopWalletAddress = () => {
 	return (
 		<>
 			<Grid container>
@@ -269,4 +269,4 @@ const WalletAddress = () => {
 	);
 };
 
-export default WalletAddress;
+export default DesktopWalletAddress;

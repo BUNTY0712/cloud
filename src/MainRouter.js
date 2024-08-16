@@ -14,9 +14,12 @@ import AddMember from './Pages/Desktop/AddMember';
 // import Direct from './Pages/Desktop/direct';
 import Directt from './Pages/Desktop/Directt';
 import Tree from './Pages/Desktop/Tree';
-import WalletAddress from './Pages/Desktop/WalletAddress';
 import Try from './Pages/Desktop/Try';
 import Search from './Pages/Desktop/Search';
+import DesktopWalletAddress from './Pages/Desktop/DesktopWalletAddress';
+import WalletAdress from './Pages/Combine/WalletAdress';
+import MyActivation from './Pages/Combine/MyActivation';
+import MainWallet from './Pages/Combine/MainWallet';
 // import Login from './Pages/Login';
 
 const PrivateRoute = ({ element, ...props }) => {
@@ -43,7 +46,10 @@ const MainRouter = () => {
 				<Route path='/try' element={<Try />} />
 				<Route path='/search' element={<Search />} />
 
-				<Route path='/walletaddress' element={<WalletAddress />} />
+				<Route path='/myactivation' element={<MyActivation />} />
+				<Route path='/mainwallet' element={<MainWallet />} />
+				<Route path='/walletaddress' element={<WalletAdress />} />
+
 				<Route
 					path='/dashboard'
 					element={<PrivateRoute element={<Dashboard />} />}

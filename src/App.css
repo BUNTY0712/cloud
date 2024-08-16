@@ -1,0 +1,54 @@
+.mob-border {
+	border-bottom: 1px solid #e9ebeb;
+	width: 100%;
+}
+.mob-add-padd {
+	padding: 20px;
+}
+
+.mob-list-mar {
+	margin-top: -3px;
+}
+.to-mem-bold {
+	font-weight: bold;
+}
+.to-mem-UserId {
+	color: rgb(0, 140, 255);
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.fund-balance {
+	color: black;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.flex-box {
+	display: flex;
+}
+
+.my-button {
+	padding: 10px 15px;
+	background: #4788ff;
+	width: 100%;
+	color: white;
+	border-radius: 5px;
+	display: flex;
+}
+.my-button-proceed {
+	padding: 10px 15px;
+	background: #9aa4b7;
+	width: 46%;
+	color: white;
+	border-radius: 5px;
+}
+
+.proceed-space {
+	padding: 20px;
+}
+
+.BiDetail {
+	margin-right: 5px;
+	margin-top: -1px;
+}
