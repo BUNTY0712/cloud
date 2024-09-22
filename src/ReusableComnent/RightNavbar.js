@@ -11,8 +11,15 @@ import { IoCalculatorOutline } from 'react-icons/io5';
 import { GiSpeedometer } from 'react-icons/gi';
 import { BiSupport } from 'react-icons/bi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { setMenuList } from '../Reducers/UiReducer';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const RightNavbar = () => {
+	const { menulist } = useSelector((state) => state.ui);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const menu_item = [
 		{
 			name: 'Dashboard',
@@ -31,7 +38,7 @@ const RightNavbar = () => {
 			link3: 'Activation Wallet',
 			// link4: 'History',
 
-			nav1: '/newactivation',
+			nav1: '/newactivationn',
 			nav2: '/report',
 			nav3: '/activationwallet',
 		},
@@ -114,9 +121,15 @@ const RightNavbar = () => {
 					<h5>Menu</h5>
 				</Box>
 				{menu_item.map((item, i) => (
-					<>
+					<React.Fragment key={i}>
 						<Box
-							key={i}
+							onClick={() =>
+								dispatch(
+									setMenuList(
+										item.name === menulist.name ? '' : { name: item.name }
+									)
+								)
+							}
 							mt={2}
 							style={{
 								textAlign: 'center',
@@ -125,6 +138,7 @@ const RightNavbar = () => {
 								justifyContent: 'space-between',
 								fontWeight: '600',
 								padding: '10px 20px',
+								cursor: 'pointer',
 							}}>
 							<Box style={{ display: 'flex' }}>
 								<Box>{item.logo}</Box>
@@ -134,57 +148,51 @@ const RightNavbar = () => {
 							</Box>
 							<Box>{item.rightarrow}</Box>
 						</Box>
-						{item.link1 && (
-							<Box
-								style={{
-									display: 'flex',
-									padding: '10px 28px',
-									// textAlign: 'center',
-									color: 'white',
-									// justifyContent: 'center',
-								}}>
-								<Box style={{}}>-</Box>
 
-								<Box ml={1} style={{}}>
-									{item.link1}
-								</Box>
+						{menulist.name === item.name && ( // Corrected conditional rendering
+							<Box>
+								{item.link1 && (
+									<Box
+										onClick={() => navigate(item.nav1)}
+										style={{
+											display: 'flex',
+											padding: '10px 28px',
+											color: 'white',
+											cursor: 'pointer',
+										}}>
+										<Box>-</Box>
+										<Box ml={1}>{item.link1}</Box>
+									</Box>
+								)}
+								{item.link2 && (
+									<Box
+										style={{
+											display: 'flex',
+											textAlign: 'center',
+											color: 'white',
+											padding: '10px 28px',
+											cursor: 'pointer',
+										}}>
+										<Box>-</Box>
+										<Box ml={1}>{item.link2}</Box>
+									</Box>
+								)}
+								{item.link3 && (
+									<Box
+										style={{
+											display: 'flex',
+											textAlign: 'center',
+											color: 'white',
+											padding: '10px 28px',
+											cursor: 'pointer',
+										}}>
+										<Box>-</Box>
+										<Box ml={1}>{item.link3}</Box>
+									</Box>
+								)}
 							</Box>
 						)}
-
-						{item.link2 && (
-							<Box
-								style={{
-									display: 'flex',
-									textAlign: 'center',
-									color: 'white',
-									padding: '10px 28px',
-									// justifyContent: 'center',
-								}}>
-								<Box style={{}}>-</Box>
-
-								<Box ml={1} style={{}}>
-									{item.link2}
-								</Box>
-							</Box>
-						)}
-
-						{item.link3 && (
-							<Box
-								style={{
-									display: 'flex',
-									textAlign: 'center',
-									color: 'white',
-									padding: '10px 28px',
-									// justifyContent: 'center',
-								}}>
-								<Box style={{}}>-</Box>
-
-								<Box ml={1} style={{}}>
-									{item.link3}
-								</Box>
-							</Box>
-						)}
-					</>
+					</React.Fragment>
 				))}
 			</Grid>
 		</>

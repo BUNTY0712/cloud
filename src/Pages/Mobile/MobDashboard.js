@@ -10,26 +10,12 @@ import { BiGroup } from 'react-icons/bi';
 import { MdCurrencyRupee } from 'react-icons/md';
 import { FaWallet } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
+import MobileUpperMenu from './ResuableComponent/MobileUpperMenu';
 
 const MobDashboard = () => {
 	return (
 		<>
-			<Box
-				style={{
-					background: '#192072',
-					color: 'white',
-					padding: '15px',
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-				}}>
-				<Box style={{ fontSize: '30px' }}>
-					<RiMenu2Line />
-				</Box>
-				<Box>
-					<h3>Logo</h3>
-				</Box>
-			</Box>
+			<MobileUpperMenu />
 			<Box
 				mt={2}
 				style={{

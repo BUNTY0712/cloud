@@ -1,46 +1,38 @@
-import { Box, Grid } from '@mui/material';
 import React from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { Box, Grid } from '@mui/material';
 import { useTable } from 'react-table';
-import RightNavbar from '../../ReusableComnent/RightNavbar';
-// import UpperMenu from './ResuableComponent.js/UpperMenu';
-import MUIDataTable from 'mui-datatables';
-import { MdOutlineFeaturedPlayList } from 'react-icons/md';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 import MobileUpperMenu from './ResuableComponent/MobileUpperMenu';
+import { MdOutlineFeaturedPlayList } from 'react-icons/md';
 
-const MobileMyActivation = () => {
+const MobLoanInstallment = () => {
 	const loanData = [
 		{
 			'#': '1',
-			Date: '16-May-24 12:18:05',
-			Amount: '32620.00',
-			'Member userId': 'FT-Juhi',
+			Loan: '2250-1800',
+			Description: 'First Loan, First installment of total 4',
+			Credit: '0',
+			Debit: '450',
+			Penalty: '0',
 		},
 		{
 			'#': '2',
-			Date: '16-May-24 12:18:05',
-			Amount: '32620.00',
-			'Member userId': 'FT-Juhi',
+			Loan: '2250-1800',
+			Description: 'First Loan, First installment of total 4',
+			Credit: '0',
+			Debit: '450',
+			Penalty: '0',
 		},
+
 		{
 			'#': '3',
-			Date: '16-May-24 12:18:05',
-			Amount: '32620.00',
-			'Member userId': 'FT-Juhi',
-		},
-		{
-			'#': '4',
-			Date: '16-May-24 12:18:05',
-			Amount: '32620.00',
-			'Member userId': 'FT-Juhi',
+			Loan: '2250-1800',
+			Description: 'First Loan, First installment of total 4',
+			Credit: '450.00',
+			Debit: '450',
+			Penalty: '0',
 		},
 	];
-
-	// Calculate the total sum of Amount
-	const totalAmount = loanData.reduce(
-		(acc, item) => acc + parseFloat(item.Amount),
-		0
-	);
 
 	const columns = React.useMemo(
 		() => [
@@ -49,16 +41,24 @@ const MobileMyActivation = () => {
 				accessor: '#',
 			},
 			{
-				Header: 'Date',
-				accessor: 'Date',
+				Header: 'Loan',
+				accessor: 'Loan',
 			},
 			{
-				Header: 'Amount',
-				accessor: 'Amount',
+				Header: 'Description',
+				accessor: 'Description',
 			},
 			{
-				Header: 'Member userId',
-				accessor: 'Member userId',
+				Header: 'Credit',
+				accessor: 'Credit',
+			},
+			{
+				Header: 'Debit',
+				accessor: 'Debit',
+			},
+			{
+				Header: 'Penalty',
+				accessor: 'Penalty',
 			},
 		],
 		[]
@@ -70,7 +70,7 @@ const MobileMyActivation = () => {
 	return (
 		<>
 			<Grid container>
-				<Grid item md={11} xs={12} sm={12}>
+				<Grid item lg={10} md={11} xs={12} sm={12}>
 					<MobileUpperMenu />
 					<Box
 						mt={1}
@@ -85,14 +85,21 @@ const MobileMyActivation = () => {
 								fontSize: '17px',
 								textTransform: 'uppercase',
 								display: 'flex',
-								alignItems: 'center',
+								// alignItems: 'center',
 								justifyContent: 'center',
 							}}>
-							<Box>MY ACTIVATION</Box>
+							<Box style={{ marginTop: '4px', marginRight: '4px' }}>
+								<MdOutlineFeaturedPlayList
+									style={{ color: 'red', marginBottom: '10px' }}
+								/>
+							</Box>
+							<Box>
+								Loan Installments{' '}
+								<span style={{ color: '#5ba3ff' }}> [EMI]</span>
+							</Box>
 						</Box>
 					</Box>
 					<Box
-						mt={0.5}
 						style={{
 							display: 'flex',
 							paddingLeft: '20px',
@@ -100,23 +107,20 @@ const MobileMyActivation = () => {
 							paddingBottom: '15px',
 							borderBottom: '1px solid grey',
 						}}>
-						<Box style={{ color: 'black', fontWeight: '500' }}>Members</Box>
+						<Box>Loan</Box>
 						<Box ml={1}>
-							<MdKeyboardArrowRight style={{ paddingTopTop: '4px' }} />
+							<MdKeyboardArrowRight />
 						</Box>
-						<Box style={{ color: 'grey' }} ml={1}>
-							Activations
-						</Box>
+						<Box ml={1}>Loan Installments</Box>
 					</Box>
-
 					<Grid container>
 						<Grid item lg={0.5}></Grid>
 						<Grid item lg={11} sm={11} xs={11} mx='auto'>
 							<Box
 								style={{
-									maxHeight: '400px',
+									maxHeight: '400px', // Adjust height as needed
 									overflow: 'auto',
-									marginTop: '20px',
+									marginTop: '20px', // Add spacing if needed
 									border: '1px solid #f6f6f6',
 								}}>
 								<table {...getTableProps()} style={{ width: '100%' }}>
@@ -127,9 +131,15 @@ const MobileMyActivation = () => {
 													<th
 														{...column.getHeaderProps()}
 														style={{
+															borderBottom: '1px solid #f6f6f6',
 															padding: '15px',
 															textAlign: 'center',
-															backgroundColor: '#daf1e7',
+															borderRight: '1px solid  #f6f6f6',
+															backgroundColor:
+																column.Header === 'Penalty'
+																	? '#ffd4d4' // Apply background for 'Penalty' column header
+																	: '#dbe7ff',
+															// backgroundColor: '#f0f0f0',
 														}}>
 														{column.render('Header')}
 													</th>
@@ -150,6 +160,10 @@ const MobileMyActivation = () => {
 																textAlign: 'center',
 																borderBottom: '1px solid #ddd',
 																borderRight: '1px solid  #ddd',
+																backgroundColor:
+																	cell.column.Header === 'Penalty'
+																		? '#ffd4d4' // Apply background for 'Penalty' column cells
+																		: 'white',
 															}}>
 															{cell.render('Cell')}
 														</td>
@@ -157,18 +171,6 @@ const MobileMyActivation = () => {
 												</tr>
 											);
 										})}
-										{/* Add a new row for the total amount */}
-										<tr>
-											<td
-												colSpan={2}
-												style={{ textAlign: 'right', padding: '10px' }}>
-												{/* <strong>Total Amount:</strong> */}
-											</td>
-											<td style={{ textAlign: 'center', padding: '10px' }}>
-												<strong>{totalAmount.toFixed(2)}</strong>
-											</td>
-											<td></td>
-										</tr>
 									</tbody>
 								</table>
 							</Box>
@@ -180,4 +182,4 @@ const MobileMyActivation = () => {
 	);
 };
 
-export default MobileMyActivation;
+export default MobLoanInstallment;

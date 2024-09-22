@@ -12,6 +12,9 @@
 .to-mem-bold {
 	font-weight: bold;
 }
+.to-member {
+	font-weight: bold;
+}
 .to-mem-UserId {
 	color: rgb(0, 140, 255);
 	font-weight: 600;
@@ -29,12 +32,13 @@
 }
 
 .my-button {
-	padding: 10px 15px;
+	padding: 8px 15px;
 	background: #4788ff;
-	width: 100%;
+	width: 200px;
 	color: white;
 	border-radius: 5px;
 	display: flex;
+	font-size: 15px;
 }
 .my-button-proceed {
 	padding: 10px 15px;
@@ -51,4 +55,97 @@
 .BiDetail {
 	margin-right: 5px;
 	margin-top: -1px;
+}
+
+.be-transferred {
+	font-size: 13px;
+}
+.new-activation-padd {
+	padding: 0px 15px;
+}
+
+.mob-menu-data {
+	position: absolute;
+	z-index: 33;
+}
+
+.flex-box-2 {
+	display: flex;
+	justify-content: space-between;
+	padding: 23px;
+}
+
+.cross-color {
+	color: white;
+}
+
+@media only screen and (max-width: 600px) {
+	.newdirect {
+		color: #bd574a;
+		background-color: #fce9e5; /* Added commas between RGB values */
+		padding: 13px 20px;
+		font-size: 17px;
+		font-weight: 500;
+		margin-top: 48px;
+		border-radius: 5px;
+	}
+	.my-main-wallet {
+		margin: 10px;
+		border: 1px solid #8080808f;
+	}
+	.my-wallet {
+		padding: 18px 16px;
+		background-color: #efe8f8;
+		font-weight: 500;
+		font-size: 19px;
+	}
+
+	.number-total {
+		font-size: 25px;
+		padding-bottom: 13px;
+	}
+	.ruppee-design {
+		background-color: #e0f3fb;
+		padding: 6px 14px;
+		border-radius: 35px;
+		height: 49px;
+		font-size: 21px;
+		color: #5da8cc;
+	}
+	.flex-box-total {
+		display: flex;
+		justify-content: space-between;
+		border: 1px solid #80808052;
+		margin: 20px;
+		padding: 11px;
+	}
+	.ruppee-design-2 {
+		background-color: #fde8e7;
+		padding: 13px 13px;
+		border-radius: 35px;
+		height: 50px;
+		font-size: 21px;
+		text-align: center;
+	}
+	.ruppee-design-3 {
+		background-color: #e1f5ec;
+		padding: 10px 13px;
+		border-radius: 35px;
+		height: 50px;
+		font-size: 21px;
+		text-align: center;
+		color: #59b78d;
+	}
+	.RiArrowRightUpFill-design {
+		background-color: #fc6255;
+		padding: 0px 4px;
+		border-radius: 18px;
+		height: 24px;
+		font-size: 13px;
+		color: white;
+	}
+
+	.Total-Withdraw {
+		color: #808080;
+	}
 }

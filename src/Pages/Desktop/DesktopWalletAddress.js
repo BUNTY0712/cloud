@@ -206,11 +206,10 @@ const DesktopWalletAddress = () => {
 							</Box>
 						</Grid>
 
-						<Grid item lg={3.5} mx='auto'>
+						{/* <Grid item lg={3.5} mx='auto'>
 							<Box
 								mt={2}
 								style={{ border: '1px solid #e9ebec', paddingBottom: '30px' }}>
-								{/* Note  */}
 								<Box
 									// mt={2}
 									style={{
@@ -261,7 +260,7 @@ const DesktopWalletAddress = () => {
 									</Box>
 								</Box>
 							</Box>
-						</Grid>
+						</Grid> */}
 					</Grid>
 				</Grid>
 			</Grid>

@@ -1,35 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./Reducers";
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './Reducers'; // Make sure this path is correct
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-const saveToSessionStorage = (state) => {
-  try {
-    const serializedState = JSON.stringify(state);
-    sessionStorage.setItem("reduxState", serializedState);
-  } catch (e) {
-    console.log(e);
-  }
+const persistConfig = {
+	key: 'root',
+	storage,
 };
 
-const loadFromSessionStorage = () => {
-  try {
-    const serializedState = sessionStorage.getItem("reduxState");
-    if (serializedState === null) {
-      return undefined;
-    }
-    return JSON.parse(serializedState);
-  } catch (e) {
-    console.log(e);
-    return undefined;
-  }
-};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: loadFromSessionStorage(), // Load initial state from session storage
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false, // Disable serializable checks for non-serializable state
+		}),
 });
 
-store.subscribe(() => {
-  saveToSessionStorage(store.getState()); // Save state to session storage after every state change
-});
+export const persistor = persistStore(store);
 
 export default store;
