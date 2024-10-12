@@ -1,0 +1,42 @@
+export const loanData = [
+	{
+		id: '1',
+		approvedloan: '4000',
+		netloan: '2450',
+		emi: '612.5',
+		totalweek: '64',
+		paidweek: '4',
+	},
+	{
+		id: '2',
+		approvedloan: '10000',
+		netloan: '7500',
+		emi: '1250',
+		totalweek: '6',
+		paidweek: '6',
+	},
+	{
+		id: '3',
+		approvedloan: '17500',
+		netloan: '15000',
+		emi: '1500',
+		totalweek: '10',
+		paidweek: '10',
+	},
+	// {
+	// 	id: '4',
+	// 	approvedloan: '25000',
+	// 	netloan: '20000',
+	// 	emi: '1666',
+	// 	totalweek: '12',
+	// 	paidweek: '12',
+	// },
+	// {
+	// 	id: '5',
+	// 	approvedloan: '50000',
+	// 	netloan: '40000',
+	// 	emi: '2857',
+	// 	totalweek: '14',
+	// 	paidweek: '14',
+	// },
+];

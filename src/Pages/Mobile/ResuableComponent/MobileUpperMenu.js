@@ -21,10 +21,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setMobMenu } from '../../../Reducers/UiReducer';
 import { useNavigate } from 'react-router-dom';
+import { FilterUser } from '../../Utlis';
 
 const MobileUpperMenu = () => {
 	const navigate = useNavigate();
-	const { mobmenu } = useSelector((state) => state.ui);
+	const { mobmenu, mainId } = useSelector((state) => state.ui);
 	const [togglenav, setNavtoggle] = useState('off');
 	const [name, setName] = useState('');
 
@@ -94,9 +95,12 @@ const MobileUpperMenu = () => {
 			logo: <IoCalculatorOutline />,
 			// link1: 'Loan history',
 			link2: 'Loan Installment (EMI)',
+			link3: 'Loan List',
+
 			rightarrow: <MdKeyboardArrowRight />,
 			// nav1: '/loanhistory',
 			nav2: '/loaninstallment',
+			nav3: '/loanlist',
 		},
 		{
 			name: 'Setting',
@@ -153,7 +157,11 @@ const MobileUpperMenu = () => {
 									<Box style={{ textAlign: 'center', color: 'white' }}>
 										<h5>Menu</h5>
 									</Box>
-									<Box onClick={() => dispatch(setMobMenu('off'))}>
+									<Box
+										onClick={() => {
+											dispatch(setMobMenu('off'));
+											FilterUser(mainId, dispatch);
+										}}>
 										<RxCross2 className='cross-color' />
 									</Box>
 								</Box>

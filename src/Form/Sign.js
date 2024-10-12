@@ -1,20 +1,29 @@
 import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import MobileUpperMenu from '../Pages/Mobile/ResuableComponent/MobileUpperMenu';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { FilterUser } from '../Pages/Utlis';
 
 const Sign = () => {
+	const { mainId } = useSelector((state) => state.ui);
 	// Define state for each form field
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [formData, setFormData] = useState({
-		sponsor_id: '',
-		choice_id: '',
+		sponsor_id: '54',
+		choice_id: '51',
 		position: 'Left',
-		fullname: '',
-		phone: '',
+		fullname: 'suraj',
+		phone: '9122868698',
 		country: 'India',
-		email: '',
-		city: '',
-		password: '',
-		confirm_password: '',
+		email: 's@gmail.com',
+		city: 'dhanbad',
+		password: '12',
+		confirm_password: '12',
+		mainId: mainId,
 	});
 
 	// Handle input change for form fields
@@ -38,8 +47,10 @@ const Sign = () => {
 			);
 
 			const result = await response.json();
-
+			console.log('response', result.user);
 			if (response.ok) {
+				navigate('/dashboard');
+				FilterUser(mainId, dispatch);
 				alert('User registered successfully');
 			} else {
 				alert(`Error: ${result.message}`);

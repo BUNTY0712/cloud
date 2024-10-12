@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiMenu2Line } from 'react-icons/ri';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
@@ -11,8 +11,117 @@ import { MdCurrencyRupee } from 'react-icons/md';
 import { FaWallet } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 import MobileUpperMenu from './ResuableComponent/MobileUpperMenu';
+import { useSelector } from 'react-redux';
+import { createEmi, createLoan } from '../Utlis';
+import { loanData } from '../Data/Data';
+import { useDispatch } from 'react-redux';
+import { setAvailableLoan } from '../../Reducers/UiReducer';
 
 const MobDashboard = () => {
+	const { availableloan, mainId, sixuser } = useSelector((state) => state.ui);
+	// console.log('sixuser', sixuser);
+	const dispatch = useDispatch();
+	const [loanDetails, setLoanDetails] = useState({
+		netloandata: availableloan.netloan || '5254',
+		emidata: availableloan.ewi || '524',
+		// netloandata: availableloan.netloan,
+		// emidata: availableloan.ewi,
+	});
+
+	// useEffect(() => {
+	// 	setLoanDetails({
+	// 		loanDetails:
+	// 	});
+	// }, [dispatch]);
+
+	const [formData, setFormData] = useState({
+		loan: availableloan.netloan,
+		description: 'EMI Paid',
+		credit: '0',
+		debit: availableloan.ewi,
+		penalty: '0',
+		userId: mainId,
+		currentloan:
+			availableloan.netloan.toString() - availableloan.ewi.toString(),
+	});
+	const [updateLoan, setUpdateLoan] = useState({
+		approvedloan: null,
+		netloan: null,
+		ewi: null,
+		totalweek: null,
+		paidweek: null,
+		userId: 1, // Ensure userId matches mainId
+	});
+
+	const handleSubmit = async () => {
+		try {
+			const response = await createEmi(formData);
+			setFormData((prevData) => ({
+				...prevData,
+				currentloan: response.currentloan - loanDetails.emidata,
+			}));
+
+			if (formData.currentloan <= 0) {
+				const Index = loanData.findIndex(
+					(item) => item.netloan === response.loanamount
+				);
+
+				console.log('Index', Index);
+
+				if (Index + 1 < loanData.length) {
+					const loandata = loanData[Index + 1];
+					console.log('Found loan data at Index + 2:', loandata);
+
+					// Instead of setting the state and waiting for it to update, directly use the values from loanData
+					const updatedLoanData = {
+						approvedloan: loandata.approvedloan,
+						netloan: loandata.netloan,
+						ewi: loandata.emi,
+						totalweek: loandata.totalweek,
+						paidweek: loandata.paidweek,
+						userId: mainId,
+					};
+
+					console.log('Sending updated loan data:', updatedLoanData);
+
+					// Call createLoan with the updated values directly
+					const createloandata = await createLoan(updatedLoanData);
+					// dispatch(setAvailableLoan(createloandata));
+					console.log('createloandata', createloandata);
+					setLoanDetails((prevData) => ({
+						...prevData,
+						emidata: createloandata.ewi,
+					}));
+					setFormData((prevData) => ({
+						...prevData,
+						currentloan: createloandata.netloan,
+						loan: createloandata.netloan,
+					}));
+				} else {
+					console.error('Index + 2 is out of bounds');
+				}
+			}
+		} catch (error) {
+			console.error('Error submitting EMI:', error);
+		}
+	};
+	const updatedLoanDataa = {
+		approvedloan: loanData[0].approvedloan,
+		netloan: loanData[0].netloan,
+		ewi: loanData[0].emi,
+		totalweek: loanData[0].totalweek,
+		paidweek: loanData[0].paidweek,
+		userId: mainId,
+	};
+	const createInitalLoan = async () => {
+		const Data = await createLoan(updatedLoanDataa);
+		dispatch(setAvailableLoan(Data));
+		setFormData((prevData) => ({
+			...prevData,
+			currentloan: Data.netloan,
+		}));
+	};
+
 	return (
 		<>
 			<MobileUpperMenu />
@@ -25,6 +134,7 @@ const MobDashboard = () => {
 				}}>
 				<Box style={{ fontWeight: 'bold', fontSize: '20px' }}>Dashboard</Box>
 			</Box>
+
 			<Box ml={2.5} style={{ display: 'flex' }}>
 				<Box>Dashboard</Box>
 
@@ -32,6 +142,12 @@ const MobDashboard = () => {
 					<MdKeyboardArrowRight />
 				</Box>
 				<Box ml={1}>Statistics</Box>
+			</Box>
+			<Box onClick={handleSubmit}>
+				<button className='btn btn-primary'>{loanDetails.emidata}</button>
+			</Box>
+			<Box onClick={createInitalLoan}>
+				<button className='btn btn-primary'>624</button>
 			</Box>
 			{/* marquee */}
 			<Box mt={2} style={{ padding: '10px', background: '#ecf3ff' }}>

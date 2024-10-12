@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import referal from '../Assets/Image/referal.jpeg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setMainId, setMemberId } from '../Reducers/UiReducer';
+import { FilterUser, getloanDetails } from '../Pages/Utlis';
 
 const Login = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	// Define state for form fields
 	const [formData, setFormData] = useState({
@@ -24,25 +28,30 @@ const Login = () => {
 
 	// Handle form submission
 	const handleSubmit = async (e) => {
-		navigate('/dashboard');
-		// e.preventDefault();
-		// setLoading(true);
-		// try {
-		// 	const response = await axios.post(
-		// 		'http://localhost:8080/api/v1/user/login',
-		// 		formData
-		// 	);
-		// 	setLoading(false);
-		// 	if (response.data.success) {
-		// 		alert('Login successful!');
-		// 		navigate('/dashboard');
-		// 	} else {
-		// 		setError(response.data.message);
-		// 	}
-		// } catch (error) {
-		// 	setLoading(false);
-		// 	setError('Login failed. Please try again.');
-		// }
+		e.preventDefault();
+		setLoading(true);
+		try {
+			const response = await axios.post(
+				'http://localhost:8080/api/v1/user/login',
+				formData
+			);
+			const userId = response.data.user.id;
+			// Call FilterUser and pass dispatch
+			FilterUser(userId, dispatch);
+			getloanDetails(userId, dispatch);
+			dispatch(setMainId(userId));
+
+			setLoading(false);
+			if (response.data.success) {
+				alert('Login successful!');
+				navigate('/dashboard');
+			} else {
+				setError(response.data.message);
+			}
+		} catch (error) {
+			setLoading(false);
+			setError('Login failed. Please try again.');
+		}
 	};
 
 	return (
