@@ -53,6 +53,8 @@ const MobDashboard = () => {
 		userId: 1, // Ensure userId matches mainId
 	});
 
+	const [emi, setEmi] = useState([]);
+
 	const handleSubmit = async () => {
 		try {
 			const response = await createEmi(formData);
@@ -201,7 +203,7 @@ const MobDashboard = () => {
 								margin: '15px',
 								fontWeight: '600',
 							}}>
-							Loan: 2250
+							Loan: {loanDetails.emidata}
 						</Box>
 					</Box>
 
@@ -300,7 +302,7 @@ const MobDashboard = () => {
 								margin: '15px',
 								fontWeight: '600',
 							}}>
-							Loan: 2250
+							Loan: {loanDetails.emidata}
 						</Box>
 					</Box>
 
